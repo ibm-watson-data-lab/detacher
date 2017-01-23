@@ -1,6 +1,29 @@
 {
+
+  "name": "detacher",
+  "version": "1.0.0",
+  "description": "CouchDB/Cloudant attachment detacher action for OpenWhisk",
+  "main": "detach.js",
   "dependencies": {
-    "async": "^2.1.4",
     "pkgcloud": "^1.4.0"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glynnbird/detacher.git"
+  },
+
+  "keywords": [
+    "couchdb",
+    "attachment"
+  ],
+  "author": "Glynn Bird <glynn.bird@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/glynnbird/detacher/issues"
+  },
+  "homepage": "https://github.com/glynnbird/detacher#readme"
 }

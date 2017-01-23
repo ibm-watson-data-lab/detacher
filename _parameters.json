@@ -1,0 +1,17 @@
+{
+  "cloudantURL": "https://username:password@hostname.cloudant.com",
+  "dbname": "mydatabase",
+  "id": "mydocumentid",
+  "objectStorageCredentials": {
+    "auth_url": "https://identity.open.softlayer.com",
+    "domainId": "524d4ff43a1b38c6c6718886dfbb279e",
+    "domainName": "72244",
+    "password": "tfj2ufwbwuGqgw=G",
+    "project": "object_storage_123_4567",
+    "projectId": "1234567",
+    "region": "dallas",
+    "role": "admin",
+    "userId": "f850a5eb5484ed57b50648693fde445e",
+    "username": "admin_325557bde2abb165357707cee6962f6244a062d2"
+  }
+}
