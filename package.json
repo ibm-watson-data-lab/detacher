@@ -1,5 +1,4 @@
 {
-
   "name": "detacher",
   "version": "1.0.0",
   "description": "CouchDB/Cloudant attachment detacher action for OpenWhisk",
@@ -7,15 +6,17 @@
   "dependencies": {
     "pkgcloud": "^1.4.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "mocha": "./node_modules/.bin/mocha test",
+    "test": "bash scripts/run_couchdb_on_travis.sh; npm run mocha; bash scripts/stop_couchdb_on_travis.sh"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/glynnbird/detacher.git"
   },
-
   "keywords": [
     "couchdb",
     "attachment"
