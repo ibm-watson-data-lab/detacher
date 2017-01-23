@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "async": "^2.1.4",
+    "pkgcloud": "^1.4.0"
+  }
+}
