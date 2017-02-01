@@ -3,10 +3,14 @@ var pkgcloud = require('pkgcloud');
 
 /* message should be of the form:
 {
- // cloudant credentials 
- "cloudantURL": "https://username:password@hostname.cloudant.com",
- "dbname": "mydatabase",
+
+ // from the _changes feed trigger
+ "dbname": "mydatabase", 
  "id": "mydocumentid",
+
+ // our configuration
+ "cloudantURL": "https://username:password@hostname.cloudant.com",
+
 
  // object storage credentials
  "objectStorageCredentials": {
@@ -152,3 +156,4 @@ var saveFile = function(creds, rs, directory, filename) {
   });
 };
 
+module.exports = main;
