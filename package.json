@@ -1,11 +1,11 @@
 {
-
   "name": "detacher",
   "version": "1.0.0",
   "description": "CouchDB/Cloudant attachment detacher action for OpenWhisk",
-  "main": "detach.js",
+  "main": "index.js",
   "dependencies": {
-    "pkgcloud": "^1.4.0"
+    "aws-sdk": "^2.135.0",
+    "cloudant": "^1.8.0"
   },
   "devDependencies": {},
   "scripts": {
@@ -15,7 +15,6 @@
     "type": "git",
     "url": "git+https://github.com/glynnbird/detacher.git"
   },
-
   "keywords": [
     "couchdb",
     "attachment"
