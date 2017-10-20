@@ -100,7 +100,7 @@ const main = (message) => {
     if (typeof doc._attachments === 'object' ) {
       
       // our new array of Object Store attachments
-      var attachments = {};
+      var attachments = doc.attachments || {};
 
       // list of Promises
       var tasks = [];
