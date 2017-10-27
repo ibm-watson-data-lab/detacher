@@ -4,15 +4,22 @@ const AWS = require('aws-sdk');
 // returns a 'pass through' stream to which the readStream to be saved
 // should be piped e.g. rs.pipe(saveFile(creds, att, filename))
 // creds - the object storage credentials
-// rs - the ReadStream of data
 // att - the CouchDB attachment object
 // filename - the filename to save it as
 const saveFile = (creds, att, filename) => {
 
-  const s3 = new AWS.S3({
+  // configure aws-sdk library
+  var config = {
     accessKeyId: creds.AWS_ACCESS_KEY_ID,
     secretAccessKey: creds.AWS_SECRET_ACCESS_KEY,
-    region: creds.AWS_REGION});
+    region: creds.AWS_REGION
+  };
+  if (creds.AWS_ENDPOINT) {
+    config.endpoint = creds.AWS_ENDPOINT;
+  }
+  const s3 = new AWS.S3(config);
+
+  // configure the object to upload
   const passThrough = new stream.PassThrough();
   const params = {
     Bucket: creds.AWS_BUCKET,
@@ -20,10 +27,9 @@ const saveFile = (creds, att, filename) => {
     ContentType: att.content_type,
     Body: passThrough
   };
-  const options = {partSize: 10 * 1024 * 1024, queueSize: 1};
 
   // initiate upload, waiting for data to arrive from the stream
-  s3.upload(params, options, (err, data) => {
+  s3.upload(params, (err, data) => {
 
     // if there was no error
     if (!err) {
@@ -34,6 +40,10 @@ const saveFile = (creds, att, filename) => {
 
       // fire a custom 'uploaded' event
       passThrough.emit('uploaded', att);
+
+    } else {
+      console.log('upload error', err)
+      throw(new Error(err));
     }
   });
 
@@ -52,6 +62,7 @@ const saveFile = (creds, att, filename) => {
 // AWS_SECRET_ACCESS_KEY - the s3 secret
 // AWS_REGION - the region the S3 bucket lives in
 // AWS_BUCKET - the bucket name
+// AWS_ENDPOINT - the API endpoint to use
 const main = (message) => {
 
   // check for required parameters
@@ -73,12 +84,13 @@ const main = (message) => {
     }
   });
   if (errs.length > 0) {
+    console.log('error', errs);
     return { err: errs };
   }
 
   // setup Cloudant library - we need to two Cloudant connections
   // 1) using the "promises" plugin so we can use the Cloudant library with promises
-  // 2) using hte "default" plugin so we can get a readable stream of the attachment data
+  // 2) using the "default" plugin so we can get a readable stream of the attachment data
   const cloudant = require('cloudant')({
     account: message.CLOUDANT_HOST, 
     username: message.CLOUDANT_USERNAME,

@@ -79,6 +79,8 @@ export AWS_REGION="eu-west-2"
 export AWS_ENDPOINT="https://ec2.eu-west-2.amazonaws.com"
 ```
 
+> If you are using Amazon S3, you can omit the `AWS_ENDPOINT` environment variable. For the IBM Cloud Object Storage service, the endpoints are [listed here](https://ibm-public-cos.github.io/crs-docs/endpoints). 
+
 Then run the `deploy.sh` script
 
 ```sh
