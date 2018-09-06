@@ -125,7 +125,11 @@ const main = (message) => {
           console.log('Detatching', attName);
           const att = doc._attachments[attName];
           const contentType = att.content_type;
-          const filename = doc._id + '-' + attName;
+          const extension = contentType.split('/')[1]
+          let filename = `${sampleID}-${attName}`;
+          if (extension) {
+            filename += `.${extension}`;
+          }
 
           // fetch the attachment and pipe it into
           // the stream that points to the S3 bucket
